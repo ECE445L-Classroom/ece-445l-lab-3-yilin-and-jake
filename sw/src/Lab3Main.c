@@ -22,13 +22,15 @@
  For more information about my classes, my research, and my books, see
  http://users.ece.utexas.edu/~valvano/
  */
+ 
 // Specify your hardware connections, feel free to change
 // PD0 is squarewave output to speaker
-// PE0 is mode select
-// PE1 is left
-// PE2 is right 
-// PE3 is up
-// PE4 is down
+// PF0 is mode select
+// PF4 is display select
+// PC6 is left
+// PC5 is right 
+// PC4 is up
+// PC7 is down
 // if alarm is sounding, any button will quiet the alarm
 
 #include <stdio.h>
@@ -37,18 +39,26 @@
 #include "../inc/PLL.h"
 #include "../inc/tm4c123gh6pm.h"
 #include "../inc/Timer0A.h"
-#include "Lab3.h"
+#include "Switch.h"
+#include "Clock.h"
+#include "Display.h"
+#include "../inc/SysTickInts.h"
+
 // ---------- Prototypes   -------------------------
 void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
 void WaitForInterrupt(void);  // low power mode
+
 int main(void){
   DisableInterrupts();
   PLL_Init(Bus80MHz);    // bus clock at 80 MHz
+	Switch_Init(); //Initializes directional switches and onboard switches
+	Clock_Init(); //Starts the timers
+	Display_Init(); //Initializes display to start on digital mode
   // write this
   EnableInterrupts();
-  while(1){
-      // write this
+  while(1){  
+		// write this
   }
 }
 

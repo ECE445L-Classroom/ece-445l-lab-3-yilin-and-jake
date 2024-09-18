@@ -26,6 +26,7 @@
 #include "../inc/tm4c123gh6pm.h"
 #include "../inc/CortexM.h"
 #include "../inc/SysTickInts.h"
+#include "../src/Clock.h"
 
 
 
@@ -45,6 +46,10 @@ void SysTick_Init(uint32_t period){long sr;
                               // enable SysTick with core clock and interrupts
   NVIC_ST_CTRL_R = 0x07;
   EndCritical(sr);
+}
+
+void SysTick_Handler(void){
+	Play_Sound();
 }
 
 
